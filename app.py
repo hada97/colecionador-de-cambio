@@ -32,7 +32,7 @@ try:
     dollar_element = driver.find_element(By.XPATH, "//*[@id='knowledge-currency__updatable-data-column']/div[1]/div[2]/span[1]")
     dollar_value = dollar_element.get_attribute("data-value")
     dollar_value_float = float(dollar_value)
-    print("***************")
+    print("=" * 30)
     print("Dólar = R$ {:.2f}".format(dollar_value_float))
 
     time.sleep(2)
@@ -78,6 +78,6 @@ try:
     print("PDF criado com sucesso!")
 
 finally:
-    print("***************")
-    print("FIM DA EXECUÇÃO")
-    print("***************")
+    print("=" * 30)
+    print("        FIM DA EXECUÇÃO          ")
+    print("=" * 30)
