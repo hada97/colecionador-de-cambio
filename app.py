@@ -13,9 +13,15 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from fpdf import FPDF
 
+# Ativa o Chrome em modo headless,sem interface gráfica
+options = webdriver.ChromeOptions()
+#options.add_argument('--headless') #Executa o Chrome em modo "headless" --- remova # para ativar
+options.add_argument('--no-sandbox') #desativa a funcionalidade de sandbox do Chrome, é uma camada de segurança que isola processos
+options.add_argument('--disable-dev-shm-usage') #instrui o Chrome a n usar memória compartilhada do sistema para armazenar dados temp.Isso é útil em Docker
+
 # Configuração do serviço do ChromeDriver
 service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome(service=service, options=options)
 
 try:
     # Abrir a página do Google
