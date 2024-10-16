@@ -1,10 +1,7 @@
-"""   
-pip install selenium
-pip install webdriver-manager
-pip install fpdf
-
-"""
-
+# Instalação de pacotes necessários (executar apenas uma vez)
+# !pip install selenium
+# !pip install webdriver-manager
+# !pip install fpdf
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -12,88 +9,75 @@ from selenium.webdriver.common.keys import Keys
 import time
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-import smtplib
-from email.mime.text import MIMEText
 from fpdf import FPDF
 
-servico = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome()
-
+# Configuração do serviço do ChromeDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
 
 try:
-    # Abrir a página do ITSM
-    driver.get('https://google.com')  # Altere para a URL do seu site ITSM
+    # Abrir a página do Google
+    driver.get('https://google.com')
 
-    # Esperar um pouco para garantir que a página carregue
+    # Esperar a página carregar
     time.sleep(1)
 
-    # Procurar elemento por ID
-    barrapesq = driver.find_element(By.ID, 'APjFqb')  # Altere para o ID do elemento desejado
-    barrapesq.click()  # Exemplo de clicar no elemento
-    barrapesq.send_keys("dolar hoje") #escreve texto dentro do campo
-    barrapesq.send_keys(Keys.RETURN) #simula o enter
-    dolar = driver.find_element("xpath", "//*[@id='knowledge-currency__updatable-data-column']/div[1]/div[2]/span[1]")
-    valordolar = dolar.get_attribute("data-value")
-    print("Dolar = R$ "+valordolar)
-    time.sleep(100)
+    # Pesquisar o valor do dólar
+    search_box = driver.find_element(By.ID, 'APjFqb')  # Campo de pesquisa
+    search_box.click()
+    search_box.send_keys("dolar hoje")
+    search_box.send_keys(Keys.RETURN)
 
+    # Capturar o valor do dólar
+    dollar_element = driver.find_element(By.XPATH, "//*[@id='knowledge-currency__updatable-data-column']/div[1]/div[2]/span[1]")
+    dollar_value = dollar_element.get_attribute("data-value")
+    dollar_value_float = float(dollar_value)
+    print("***************")
+    print("Dólar = R$ {:.2f}".format(dollar_value_float))
+
+    time.sleep(2)
+
+    # Pesquisar o valor do euro
+    searc = driver.find_element("xpath", "//*[@id='APjFqb']")
+    searc.click()
+    searc.clear() 
+    searc.send_keys("euro hoje")#escreve texto da nova pesquisa
+    searc.send_keys(Keys.RETURN)
+
+    # Capturar o valor do euro
+    euro_element = driver.find_element(By.XPATH, "//*[@id='knowledge-currency__updatable-data-column']/div[1]/div[2]/span[1]")
+    euro_value = euro_element.get_attribute("data-value")
+    euro_value_float = float(euro_value)
+    print("Euro = R$ {:.2f}".format(euro_value_float))
+
+    time.sleep(1)
 
 finally:
     # Fechar o navegador
     driver.quit()
 
-
+# Criação do PDF com os valores obtidos
 try:
-    # Criação do PDF
     pdf = FPDF()
     pdf.add_page()
+    pdf.set_font("Arial", size=20)
 
-    # Definindo fonte
-    pdf.set_font("Arial", size=24)
+    # Adicionando título ao PDF
+    pdf.cell(200, 10, txt="Câmbio Hoje", ln=True, align='L')
 
-    # Adicionando um título
-    pdf.cell(200, 10, txt="Valor do Dólar", ln=True, align='C')
+    # Mensagens com os valores
+    dollar_message = f"O valor do dólar hoje é R$ : R$ {dollar_value_float:.2f}"
+    euro_message = f"O valor do euro hoje é R$ : R$ {euro_value_float:.2f}"
 
-    # Adicionando o valor do dólar
-    mensagem = f"O valor do dólar hoje é: {valordolar}"
-    pdf.cell(200, 10, txt=mensagem, ln=True, align='C')
+    # Adicionando valores ao PDF
+    pdf.cell(0, 10, txt=dollar_message, ln=True, align='L')
+    pdf.cell(0, 10, txt=euro_message, ln=True, align='L')
 
     # Salvando o PDF
-    pdf.output("valor_dolar.pdf")
-    print("-----------------------")
+    pdf.output("valor_cambio.pdf")
     print("PDF criado com sucesso!")
 
- 
 finally:
-    print("-----------------------")
-    print("----FIM DA EXECUCAO----")
-    print("-----------------------")
-    
-  
-
-
-
-
-""" 
-# Configurações do email
-de = "oi@gmail.com"
-para = "oi@gmail.com"
-senha = "senha"  # Tenha cuidado ao armazenar senhas
-assunto = "Valor do Dólar Hoje"
-mensagem = f"O valor do dólar hoje é: {valordolar}"
-
-# Cria o corpo do email
-msg = MIMEText(mensagem)
-msg['Subject'] = assunto
-msg['From'] = de
-msg['To'] = para
-
-# Envia o email
-try:
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-        server.login(de, senha)
-        server.sendmail(de, para, msg.as_string())
-    print("Email enviado com sucesso!")
-except Exception as e:
-    print(f"Erro ao enviar o email: {e}")"""
-
+    print("***************")
+    print("FIM DA EXECUÇÃO")
+    print("***************")
