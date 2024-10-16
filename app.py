@@ -1,7 +1,10 @@
 # Instalação de pacotes necessários (executar apenas uma vez)
-# !pip install selenium
-# !pip install webdriver-manager
-# !pip install fpdf
+"""
+pip install selenium
+pip install webdriver-manager
+pip install fpdf
+
+"""
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
