@@ -11,7 +11,7 @@ Este projeto coleta as cotações do dólar e do euro diretamente do Google e ge
 ## 🛠 Tecnologias
 
 O projeto utiliza as seguintes tecnologias:
-- **Python**: Linguagem de programação utilizada.
+- **Python 3.12**: Linguagem de programação utilizada.
 - **Selenium**: Biblioteca para automação de navegadores.
 - **FPDF**: Biblioteca para criação de arquivos PDF.
 - **Webdriver Manager**: Gerenciador de drivers para Selenium.
@@ -24,21 +24,28 @@ Este projeto é licenciado sob a Licença MIT.
 
 Para começar a utilizar este projeto, siga as etapas abaixo:
 
-1. Clone o repositório:
+1. **Certifique-se de ter o `pip` instalado**: O `pip` é o gerenciador de pacotes para Python. Você pode verificar se ele está instalado executando o seguinte comando no terminal:
+    ```bash
+    pip --version
+    ```
+   Se não estiver instalado, você pode seguir as instruções [neste link](https://pip.pypa.io/en/stable/installation/) para instalá-lo.
+
+2. Clone o repositório:
     ```bash
     git clone https://github.com/seu_usuario/colecionador-de-cambio
     ```
-2. Navegue até o diretório do projeto:
+
+3. Navegue até o diretório do projeto:
     ```bash
     cd colecionador-de-cambio
     ```
 
-3. Instale as dependências:
+4. Instale as dependências:
     ```bash
     pip install selenium webdriver-manager fpdf
     ```
 
-4. Execute o script:
+5. Execute o script:
     ```bash
     python app.py
     ```
@@ -46,4 +53,5 @@ Para começar a utilizar este projeto, siga as etapas abaixo:
 ## 📄 Exemplo de Saída
 
 Após a execução, você verá as cotações impressas no console e um arquivo PDF chamado `valor_cambio.pdf` será gerado com as informações coletadas.
+
 

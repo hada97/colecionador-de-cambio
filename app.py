@@ -1,14 +1,13 @@
 # Instalação de pacotes necessários (executar apenas uma vez)
 """
-pip install selenium
-pip install webdriver-manager
-pip install fpdf
-
+pip install selenium webdriver-manager fpdf
 """
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -26,29 +25,37 @@ try:
     time.sleep(1)
 
     # Pesquisar o valor do dólar
-    search_box = driver.find_element(By.ID, 'APjFqb')  # Campo de pesquisa
+    search_box = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.ID, 'APjFqb'))  # Campo de pesquisa
+    )
     search_box.click()
     search_box.send_keys("dolar hoje")
     search_box.send_keys(Keys.RETURN)
 
     # Capturar o valor do dólar
-    dollar_element = driver.find_element(By.XPATH, "//*[@id='knowledge-currency__updatable-data-column']/div[1]/div[2]/span[1]")
+    dollar_element = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.XPATH, "//*[@id='knowledge-currency__updatable-data-column']/div[1]/div[2]/span[1]"))
+    )
     dollar_value = dollar_element.get_attribute("data-value")
     dollar_value_float = float(dollar_value)
     print("=" * 30)
     print("Dólar = R$ {:.2f}".format(dollar_value_float))
 
-    time.sleep(2)
+    time.sleep(1)
 
     # Pesquisar o valor do euro
-    searc = driver.find_element("xpath", "//*[@id='APjFqb']")
+    searc = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//*[@id='APjFqb']"))
+    )
     searc.click()
-    searc.clear() 
-    searc.send_keys("euro hoje")#escreve texto da nova pesquisa
+    searc.clear()
+    searc.send_keys("euro hoje")  # escreve texto da nova pesquisa
     searc.send_keys(Keys.RETURN)
 
     # Capturar o valor do euro
-    euro_element = driver.find_element(By.XPATH, "//*[@id='knowledge-currency__updatable-data-column']/div[1]/div[2]/span[1]")
+    euro_element = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.XPATH, "//*[@id='knowledge-currency__updatable-data-column']/div[1]/div[2]/span[1]"))
+    )
     euro_value = euro_element.get_attribute("data-value")
     euro_value_float = float(euro_value)
     print("Euro = R$ {:.2f}".format(euro_value_float))
