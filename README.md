@@ -52,6 +52,8 @@ Para começar a utilizar este projeto, siga as etapas abaixo:
 
 ## 📄 Exemplo de Saída
 
-Após a execução, você verá as cotações impressas no console e um arquivo PDF chamado `valor_yyyyMMdd.pdf` será gerado com as informações coletadas.
+Após a execução, você verá as cotações impressas no console, e numa janela grafica, além do arquivo PDF chamado `valor_yyyyMMdd.pdf` será gerado com as informações coletadas.
 
+## 📸 Imagem do Programa
 
+![Tela do programa](images/screenshot.png) <!-- Certifique-se de usar o caminho correto para a imagem -->
