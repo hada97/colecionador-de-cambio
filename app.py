@@ -3,6 +3,7 @@
 import time
 import tkinter as tk
 from fpdf import FPDF
+from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -52,7 +53,7 @@ def pesquisar():
 
        
 janela = tk.Tk()
-janela.title("Câmbio Auto")
+janela.title("Câmbio")
 janela.geometry("500x200")
 
 # Cria um rótulo
@@ -80,8 +81,6 @@ janela.mainloop()
 
 
 try:
-    
-    # Configurações do Chrome para execução headless
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # Executa o Chrome sem interface gráfica
 
@@ -114,18 +113,22 @@ try:
     
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", size=20)
+    pdf.set_font("Arial", size=18)
 
     # Adicionando título ao PDF
-    pdf.cell(200, 10, txt="Câmbio Hoje", ln=True, align='L')
+    pdf.cell(200, 10, txt="Câmbio R$", ln=True, align='L')
 
     # Adicionando valores ao PDF usando um loop
     for i, entradas in enumerate(entradas):
-        mensagem = f"O valor do {entradas} é R$ : R$ {cotacao[i]:.2f}"
+        mensagem = f"O valor do {entradas} é R$:  {cotacao[i]:.2f}"
         pdf.cell(0, 10, txt=mensagem, ln=True, align='L')
 
+     # Obter a data atual no formato yyyMMdd
+    data_atual = datetime.now().strftime('%Y%m%d')
+    nome_arquivo = f"cambio_{data_atual}.pdf"
+
     # Salvar o PDF
-    pdf.output("cambio_hoje.pdf")
+    pdf.output(nome_arquivo)
 
 finally:
     print("=" * 30)
