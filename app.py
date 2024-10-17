@@ -1,7 +1,8 @@
-"""pip install selenium webdriver-manager fpdf"""
+"""pip install selenium webdriver-manager fpdf customtkinter"""
 
 import time
 import tkinter as tk
+import customtkinter
 from fpdf import FPDF
 from datetime import datetime
 from selenium import webdriver
@@ -34,14 +35,16 @@ def pesquisar_moeda(driver, moeda):
     return float(moeda_element.get_attribute("data-value"))
 
 
-def salvar_texto(event=None):  # Adiciona o parâmetro `event`
+
+def salvar_texto(event):
     texto = entrada_texto.get()
     if texto:
         entradas.append(texto)
         entrada_texto.delete(0, tk.END)
         print(f'Texto salvo: {texto}')
         print(f'Entradas atuais: {entradas}')
-        rotulo_feedback.config(text=f' "{texto}" salvo com sucesso!')  # Feedback visual
+        rotulo_feedback.configure(text=f' "{texto}" salvo com sucesso!') 
+
 
 def pesquisar():
     print("=" * 30)
@@ -49,21 +52,22 @@ def pesquisar():
     janela.destroy()
 
 
-janela = tk.Tk()
+janela = customtkinter.CTk()
 janela.title("Câmbio")
 janela.geometry("500x200")
 
-rotulo = tk.Label(janela, text="Digite a(s) Moeda(s) e pressione Enter:")
+rotulo = customtkinter.CTkLabel(janela, text="Digite a(s) Moeda(s) e pressione Enter:")
 rotulo.pack(pady=10)
 
-entrada_texto = tk.Entry(janela, width=50)
+# Definindo a largura da entrada de texto
+entrada_texto = customtkinter.CTkEntry(janela, placeholder_text="Digite", width=200)  # Ajuste o valor conforme necessário
 entrada_texto.pack(pady=10)
 
-rotulo_feedback = tk.Label(janela, text="")
-rotulo_feedback.pack(pady=5)
+rotulo_feedback = customtkinter.CTkLabel(janela, text="")
+rotulo_feedback.pack(pady=10)
 
 button_width = 15
-botao_pesquisar = tk.Button(janela, text="Pesquisar", command=pesquisar, width=button_width)
+botao_pesquisar = customtkinter.CTkButton(janela, text="Pesquisar", command=pesquisar, width=button_width)
 botao_pesquisar.pack(pady=10)
 
 # Vincula a tecla Enter à função salvar_texto
