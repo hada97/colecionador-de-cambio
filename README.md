@@ -6,6 +6,7 @@ Este projeto coleta as cotações do dólar e do euro diretamente do Google e ge
 
 ## ⚙️ Funcionalidades
 - Coleta automatizada de cotações de moedas.
+- Geração de interfaces gráficas para input e output de dados.
 - Geração de relatório em PDF com os valores obtidos.
 
 ## 🛠 Tecnologias
