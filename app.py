@@ -34,48 +34,40 @@ def pesquisar_moeda(driver, moeda):
     return float(moeda_element.get_attribute("data-value"))
 
 
-def salvar_texto():
+def salvar_texto(event=None):  # Adiciona o parâmetro `event`
     texto = entrada_texto.get()
     if texto:
-        entradas.append(texto)  # Adiciona o texto à lista
-        entrada_texto.delete(0, tk.END)  # Limpa o campo de entrada
-        print(f'Texto salvo: {texto}')  # Exibe no console
-        print(f'Entradas atuais: {entradas}')  # Exibe a lista atualizada
-
-
+        entradas.append(texto)
+        entrada_texto.delete(0, tk.END)
+        print(f'Texto salvo: {texto}')
+        print(f'Entradas atuais: {entradas}')
+        rotulo_feedback.config(text=f' "{texto}" salvo com sucesso!')  # Feedback visual
 
 def pesquisar():
-    # Fecha a janela
-    janela.destroy()
     print("=" * 30)
     print('Iniciando pesquisa...')
+    janela.destroy()
 
 
-       
 janela = tk.Tk()
 janela.title("Câmbio")
 janela.geometry("500x200")
 
-# Cria um rótulo
-rotulo = tk.Label(janela, text="Digite a Moeda desejada:")
+rotulo = tk.Label(janela, text="Digite a(s) Moeda(s) e pressione Enter:")
 rotulo.pack(pady=10)
 
-# Cria um campo de entrada de texto
 entrada_texto = tk.Entry(janela, width=50)
 entrada_texto.pack(pady=10)
 
-# Define a largura dos botões
-button_width = 15  # Defina um valor para a largura
+rotulo_feedback = tk.Label(janela, text="")
+rotulo_feedback.pack(pady=5)
 
-# Cria um botão para salvar o texto
-botao_salvar = tk.Button(janela, text="Salvar", command=salvar_texto, width=button_width)
-botao_salvar.pack(pady=10)
-
-# Cria um botão para pesquisar
+button_width = 15
 botao_pesquisar = tk.Button(janela, text="Pesquisar", command=pesquisar, width=button_width)
 botao_pesquisar.pack(pady=10)
 
-# Inicia o loop principal
+# Vincula a tecla Enter à função salvar_texto
+entrada_texto.bind('<Return>', salvar_texto)
 janela.mainloop()
 
 
