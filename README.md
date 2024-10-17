@@ -56,4 +56,4 @@ Após a execução, você verá as cotações impressas no console, e numa janel
 
 ## 📸 Imagem do Programa
 
-![Tela do programa](images/screenshot.png) <!-- Certifique-se de usar o caminho correto para a imagem -->
+![Interface do Coletor de Câmbio com cotações](images/screenshot.png) <!-- Certifique-se de usar o caminho correto para a imagem -->

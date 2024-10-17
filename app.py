@@ -60,7 +60,7 @@ def criar_interface():
 
 
 def realizar_pesquisa():
-    global cotacao  #Permite que a variável cotacao seja acessível aqui
+    global cotacao
     try:
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')  # Executa o Chrome sem interface gráfica
@@ -69,13 +69,19 @@ def realizar_pesquisa():
         driver.get('https://google.com')
         time.sleep(1)
         for moeda in entradas:
-            valor = pesquisar_moeda(driver, moeda)
-            cotacao.append(valor)
+            try:
+                valor = pesquisar_moeda(driver, moeda)
+                cotacao.append(valor)
+            except Exception as e:
+                print(f"Erro ao pesquisar a moeda {moeda}: {e}")
+                cotacao.append(None)  # Adiciona None para indicar falha
 
         mostrar_resultados()
-
+    except Exception as e:
+        print(f"Ocorreu um erro ao realizar a pesquisa: {e}")
     finally:
         driver.quit()
+
 
 
 
