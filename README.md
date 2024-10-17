@@ -52,6 +52,6 @@ Para começar a utilizar este projeto, siga as etapas abaixo:
 
 ## 📄 Exemplo de Saída
 
-Após a execução, você verá as cotações impressas no console e um arquivo PDF chamado `valor_cambio.pdf` será gerado com as informações coletadas.
+Após a execução, você verá as cotações impressas no console e um arquivo PDF chamado `valor_yyyyMMdd.pdf` será gerado com as informações coletadas.
 
 
