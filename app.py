@@ -52,6 +52,10 @@ def pesquisar():
     janela.destroy()
 
 
+
+customtkinter.set_appearance_mode("light")
+customtkinter.set_default_color_theme("dark-blue")
+
 janela = customtkinter.CTk()
 janela.title("Câmbio")
 janela.geometry("500x200")
