@@ -35,7 +35,7 @@ Para começar a utilizar este projeto, siga as etapas abaixo:
 
 2. Clone o repositório:
     ```bash
-    git clone https://github.com/seu_usuario/colecionador-de-cambio
+    git clone https://github.com/hada97/colecionador-de-cambio
     ```
 
 3. Navegue até o diretório do projeto:
