@@ -15,6 +15,8 @@ O projeto utiliza as seguintes tecnologias:
 - **Selenium**: Biblioteca para automação de navegadores.
 - **FPDF**: Biblioteca para criação de arquivos PDF.
 - **Webdriver Manager**: Gerenciador de drivers para Selenium.
+- **CustomTinker**: Ferramenta para personalização e otimização de interface gráfica.
+- **Tinker**: Biblioteca para construção de interfaces gráficas, permitindo a criação de aplicações com uma interface amigável e intuitiva.
 
 ## 📝 Licença
 
@@ -42,7 +44,7 @@ Para começar a utilizar este projeto, siga as etapas abaixo:
 
 4. Instale as dependências:
     ```bash
-    pip install selenium webdriver-manager fpdf
+    pip install selenium webdriver-manager fpdf customtkinter
     ```
 
 5. Execute o script:
